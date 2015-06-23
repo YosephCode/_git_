@@ -1,0 +1,33 @@
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+   .vt-username, .vt-price, .vt-btn-add{display: block;}
+   .vt-width-td-usermane{width: 120px;}
+   .vt-width-td-actions{width: 115px;}
+   .vt-hint{color: #888888; display: block;}
+   .vt-price-input{color: #888888;}/*.vt-price{color: #337ab7;}*/
+   a.glyphicon-info-sign{right:120px;text-decoration:none;font-size: 30px;vertical-align: middle;cursor: pointer;text-decoration: none;}
+   td{position:relative;vertical-align: middle;}
+   body{margin: 15px;}
+   body h1 a, body h1 a:active{text-decoration: none;color: black;}
+
+   @media (max-width: 480px){
+   		a.glyphicon-info-sign{  right: 66px;font-size: 29px;}
+   		.vt-btn-remove{position:absolute;right: 0;}
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

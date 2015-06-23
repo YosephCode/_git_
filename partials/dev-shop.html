@@ -1,0 +1,88 @@
+<article class="row">
+  <form name="myForm" class="form" role="form">
+    <div class="vt-username form-group">
+      <label for="Github Username">Github Username</label>
+      <input type="text" placeholder="GitHub Username" ng-model="username" name="username" value="{{username}}" class="form-control" required>
+    </div>
+    <div class="vt-price form-group">
+      <label for="Price">$ dolar's price</label>
+      <input type="text" placeholder="Price" disabled="true" ng-model="myForm.price" class="vt-price-input form-control" value="{{myForm.price}}" required>
+    </div>
+    <button ng-click="addDev(myForm)" ng-disabled="buttonDisbled" class="vt-btn-add btn btn-success" >Add</button>
+  </form>
+</article>
+
+
+<article class="cart row" >
+  <h2>Cart</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Price</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="product" ng-repeat="dev in devs">
+        <td class="vt-width-td-usermane">{{dev.login}}</td>
+        <td>${{dev.price}}</td>
+        <td class="vt-width-td-actions">
+          <!--<button type="button" class="btn btn-info btn-lg" >Open Modal</button>-->
+          <a class="glyphicon glyphicon-info-sign pull-right" data-toggle="modal" data-target="#myModal" ng-click="readDev($index)" aria-hidden="true"></a>
+          <button ng-click="removeDev($index)" class="vt-btn-remove btn btn-sm btn-danger pull-right">Remove</button>
+        </td>
+
+      </tr>
+    </tbody>
+  </table>
+</article>
+
+<article ng-show="devs.length > 0" class="totalizer row">
+  <div class="col-sm-5">
+    <div class="row">
+      <table class="table">
+        <tbody>
+          <tr class="total">
+            <td><strong>Total</strong></td>
+            <td><strong>${{total}}</strong></td>
+            <td><a href="/#/compraRealizada" class="vt-btn-buy btn btn-sm btn-success">Comprar</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</article>
+
+
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Developer {{devInfo.login}}</h4>
+        </div>
+        <div class="modal-body">
+          <label for="">Número de repositórios:</label>
+          <p>{{devInfo.public_repos}}</p>
+          <label for="">Número de Gists:</label>
+          <p>{{devInfo.public_gists}}</p>
+          <label for="">Número de Seguidores:</label>
+          <p>{{devInfo.followers}}</p>
+          <label>Mais informações?</label>
+          <a href="{{devInfo.html_url}}" target="_blank">Acesse o perfil dele(a)</a>
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
