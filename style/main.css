@@ -1,16 +1,25 @@
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
+   body{margin: 15px;}
+   body h1 a, body h1 a:active{text-decoration: none;color: black;}
+   td{position:relative; vertical-align: middle;}
+   figure{display: inline-block; vertical-align: top;}
+
+   .table>tbody>tr>td {vertical-align: middle;}
+   .vt-avatar, .vt-avatar-modal{ width: 80px; height: 80px; background-size: cover; }
+   .vt-avatar-modal{ width: 110px; height: 110px; background-size: cover; display: inline-block; }
+   .vt-info {display: inline-block; padding-left: 10px; vertical-align: bottom;}
    .vt-username, .vt-price, .vt-btn-add{display: block;}
    .vt-width-td-usermane{width: 120px;}
    .vt-width-td-actions{width: 115px;}
    .vt-hint{color: #888888; display: block;}
-   .vt-price-input{color: #888888;}/*.vt-price{color: #337ab7;}*/
+   .vt-price-input{color: #888888;}
    a.glyphicon-info-sign{right:120px;text-decoration:none;font-size: 30px;vertical-align: middle;cursor: pointer;text-decoration: none;}
-   td{position:relative;vertical-align: middle;}
-   body{margin: 15px;}
-   body h1 a, body h1 a:active{text-decoration: none;color: black;}
-
+      
+   /*
+   * Breakpoints
+   */
    @media (max-width: 480px){
    		a.glyphicon-info-sign{  right: 66px;font-size: 29px;}
    		.vt-btn-remove{position:absolute;right: 0;}

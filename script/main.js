@@ -2,9 +2,7 @@
 /*
 * Services Module - apiGithub
 * Service to bring 
-* github repositories (repositoriesService),
-* github users (usersService) and  
-* github contributors (contributorsService)
+* github users (usersService) 
 */
 angular.module('Services',[])
 .factory('usersService', ['$http', function($http){
@@ -34,10 +32,11 @@ var app = angular.module('App',['Services', 'ngRoute']);
 */
 app.config(function($routeProvider){
 	$routeProvider
-	.when('/', {templateUrl:'../partials/dev-shop.html', controller:'mainController'})
-	.when('/compraRealizada', {templateUrl: '../partials/compraRealizada.html'})
+	.when('/', {templateUrl:'partials/dev-shop.html', controller:'mainController'})
+	.when('/compraRealizada', {templateUrl: 'partials/compraRealizada.html'})
 	.otherwise({redirectTo:'/'})
 });
+
 
 /**
 * Controllers
@@ -63,20 +62,19 @@ app.controller('mainController', function($scope, $log, $timeout, usersService){
 		if(newUsername != undefined && newUsername.length > 1){
 
 			$scope.myForm.price = 'calculando';
-			
 
 			if(timeout) { console.log("timeoutSearch"); $timeout.cancel(timeout); }
 			timeout = $timeout(function(){
 				
 				/*
 				* UsersService
-				* take the user (login, followers, following, number of repositories)
+				* take the user (login, followers, number of repositories)
 				*/
 				usersService.event(newUsername).success(function(data,status) {
-					$scope.users = data.data;	
-					console.log($scope.users);
-					$scope.myForm.username = $scope.users.login;
+					$scope.users = data.data;
+
 					$scope.myForm = $scope.users;
+					$scope.myForm.username = $scope.users.login;
 					repositories = $scope.users.public_repos;
 					gists = $scope.users.public_gists;
 					followers = $scope.users.followers;
@@ -85,12 +83,15 @@ app.controller('mainController', function($scope, $log, $timeout, usersService){
 				});
 			}, 800);
 		}else{
-			console.log("tono ELSE");
 			$scope.myForm.price = "";
 			$scope.buttonDisbled = true;
 		}
 	});
 
+	/**
+	* calcPrice()
+	* descripition: calc the price of developers
+	*/
 	$scope.calcPrice = function(repos, gists, foll){
 		if(repos < 4){
 			$scope.myForm.price = ""; 	
@@ -108,10 +109,18 @@ app.controller('mainController', function($scope, $log, $timeout, usersService){
 		$scope.buttonDisbled = false;
 	}
 
+	/**
+	* calcTotal()
+	* description: return the calc total
+	*/
 	$scope.calcTotal = function(num, gists, foll){
 		return num + (gists + (foll/2));
 	}
 
+	/**
+	* addDev()
+	* description: add the devs in cart
+	*/
 	$scope.addDev = function(data){
 		$scope.dev = angular.copy(data);
 		var total = 0;
@@ -132,20 +141,20 @@ app.controller('mainController', function($scope, $log, $timeout, usersService){
 		}, 200);
 	};
 
+	/**
+	* removeDev()
+	* description: remove dev selected
+	*/
 	$scope.removeDev = function(index){
-		
 		$scope.devs.splice(index, 1);
-		
 	};
 
+	/**
+	* readDev()
+	* description: show the informations of dev
+	*/
 	$scope.readDev = function(index){
 		$scope.devInfo = $scope.devs[index];
-		console.table($scope.devs);
 	};
 
-	$scope.buyDev = function(myDev){
-		$scope.myDevs = [];
-		$scope.myDevs = myDev;
-		$log.info($scope.myDevs);
-	}
 });
